@@ -1,9 +1,9 @@
-CREATE TABLE smc."questions" (
+CREATE TABLE "smc_questions" (
 	id serial4 NOT NULL,
 	"name" varchar(255) NULL
 );
 
-CREATE TABLE smc."users" (
+CREATE TABLE "smc_users" (
 	id serial4 NOT NULL,
 	"name" varchar(255) NOT NULL,
     	email varchar(255) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE smc."users" (
 	CONSTRAINT "users_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE smc."shots" (
+CREATE TABLE "smc_shots" (
 	id serial4 PRIMARY KEY NOT NULL,
 	"name" varchar(255) NULL,
         "namecli" varchar(255) NULL,
@@ -28,7 +28,7 @@ CREATE TABLE smc."shots" (
 	"createdAt" timestamp without time zone NULL DEFAULT statement_timestamp()
 );
 
-CREATE TABLE smc."settings" (
+CREATE TABLE "smc_settings" (
         id serial4 PRIMARY KEY NOT NULL,
         "description" varchar(255) NULL,
         "key" varchar(255) NULL,
@@ -38,7 +38,7 @@ CREATE TABLE smc."settings" (
         "updatedAt" timestamp without time zone NULL DEFAULT statement_timestamp()
 );
 
-CREATE TABLE smc."whatsapps" (
+CREATE TABLE "smc_whatsapps" (
 	id serial4 NOT NULL,
         "session" text NULL,
         "number" varchar(14) NOT NULL,
@@ -57,6 +57,6 @@ CREATE TABLE smc."whatsapps" (
 );
 
 
-INSERT INTO smc.users (id, name, email, password) VALUES (1,'admin', 'admin@user.com', '2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b');
-INSERT INTO smc.settings (id, description, key, value, content) VALUES (1,'Intervalo de Tempo Inicial', 'timeOn', true, 60);
-INSERT INTO smc.settings (id, description, key, value, content) VALUES (2,'Intervalo de Tempo Final', 'timeOff', true, 300);
+INSERT INTO smc_users (id, name, email, password) VALUES (1,'admin', 'admin@user.com', '2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b');
+INSERT INTO smc_settings (id, description, key, value, content) VALUES (1,'Intervalo de Tempo Inicial', 'timeOn', true, 60);
+INSERT INTO smc_settings (id, description, key, value, content) VALUES (2,'Intervalo de Tempo Final', 'timeOff', true, 300);

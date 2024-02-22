@@ -15,7 +15,9 @@ RUN dart compile exe bin/server.dart -o bin/server
 FROM scratch
 COPY --from=build /runtime/ /
 COPY --from=build /app/bin/server /app/bin/
+COPY --from=build /app/images ./images
+COPY --from=build /app/.env ./
 
 # Start server.
 EXPOSE 8080
-CMD ["/app/bin/server"]
+ENTRYPOINT [ "/app/bin/server" ]

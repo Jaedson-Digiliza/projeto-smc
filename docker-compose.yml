@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ~/.smc/postgres/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - application
+
+  graphql-engine:
+    image: hasura/graphql-engine:latest
+    ports:
+      - 7000:8080
+    depends_on:
+      - postgres
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: root
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+    networks:
+      - application
+
+  wppconnect:
+    build:
+      context: ./wppconnect-server
+      dockerfile: Dockerfile
+    volumes:
+      - ./wppconnect-server/config.ts:/usr/src/wpp-server/config.ts
+      - ~/smc/wppconnect/tokens:/usr/src/wpp-server/tokens
+    networks:
+      - application
+
+  dart-server:
+    build:
+      context: ./server-smc-dart
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - application
+
+  laravel-server:
+    build:
+      context: ./backend-smc-laravel
+      dockerfile: Dockerfile
+    networks:
+      - application
+
+  frontend:
+    build:
+      context: ./frontend-smc
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - application
+
+networks:
+  application:
+    driver: bridge
