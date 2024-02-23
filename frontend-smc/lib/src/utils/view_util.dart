@@ -27,7 +27,7 @@ class ViewUtil {
 
   static String tenanty = '0';
 
-  static int sessionQtde = 2;
+  static int sessionQtde = 100;
 
   static bool kisweb = false;
 

@@ -24,8 +24,6 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: root
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-    networks:
-      - application
 
   wppconnect:
     build:
