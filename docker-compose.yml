@@ -24,6 +24,8 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: root
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+    networks:
+      - application
 
   wppconnect:
     build:
@@ -31,7 +33,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./wppconnect-server/config.ts:/usr/src/wpp-server/config.ts
-      - ~/smc/wppconnect/tokens:/usr/src/wpp-server/tokens
+      - ~/.smc/wppconnect/tokens:/usr/src/wpp-server/tokens
     networks:
       - application
 
